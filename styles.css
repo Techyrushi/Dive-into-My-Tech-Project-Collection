@@ -58,3 +58,43 @@ h1 {
     margin: 0;
     color: #555;
 }
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 1000px;
+    }
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 750px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr; /* Single column */
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        max-width: 90%;
+        padding: 10px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .card h2 {
+        font-size: 1.2em;
+    }
+
+    .card p {
+        font-size: 1em;
+    }
+}
