@@ -9,20 +9,35 @@ body {
     align-items: center;
     min-height: 100vh;
     color: #fff; /* Ensure text is readable against the background */
+    overflow: hidden; /* Prevents scrolling for better animation effect */
 }
 
 .container {
     text-align: center;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background to make text readable */
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background to make text readable without blur */
     border-radius: 12px;
     max-width: 1200px; /* Limit container width */
     margin: auto;
+    animation: fadeIn 1s ease-in-out;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); /* Adds depth to the container */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 h1 {
     font-weight: 500;
     color: #fff;
+    animation: slideIn 1s ease-in-out;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Adds text shadow for better readability */
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
 
 .cards {
@@ -30,33 +45,89 @@ h1 {
     grid-template-columns: repeat(3, 1fr); /* Fixed 3 columns */
     gap: 20px;
     margin-top: 20px;
+    animation: fadeIn 1.5s ease-in-out;
 }
 
 .card {
-    background-color: #fff;
+    background: linear-gradient(135deg, #f0f0f0, #ffffff);
     border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow for more depth */
     padding: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
     cursor: pointer;
     text-align: left;
     color: #333;
+    animation: zoomIn 0.5s ease-in-out;
+    position: relative; /* For pseudo-element styling */
+    overflow: hidden; /* To contain pseudo-element */
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+.card:hover::before {
+    opacity: 1;
 }
 
 .card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #e0e0e0, #ffffff);
 }
 
 .card h2 {
     margin: 0 0 10px;
     font-weight: 400;
     color: #0073e6;
+    animation: popIn 1s ease-in-out;
+}
+
+@keyframes popIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
 .card p {
     margin: 0;
     color: #555;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.card p::first-letter {
+    font-size: 1.5em;
+    color: #0073e6;
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1), rgba(0,0,0,0));
+    transition: transform 0.5s ease;
+    transform: scale(0);
+}
+
+.card:hover::after {
+    transform: scale(1);
 }
 
 /* Responsive Styles */
